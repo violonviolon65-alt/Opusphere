@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Opusphere</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Ton CSS perso -->
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body class="bg-login">
+  
+
+  <!-- Hero login -->
+  <div class="login-hero d-flex justify-content-center align-items-center">
+    <div class="card login-card text-center p-4 shadow-lg">
+      <h2 class="mb-4">Connexion Membres</h2>
+      <form id="loginForm">
+        <input type="text" class="form-control mb-3" id="username" placeholder="Nom d'utilisateur" required>
+        <input type="password" class="form-control mb-3" id="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn btn-login w-100 mb-3">Se connecter</button>
+      </form>
+
+      <p id="error" class="text-danger mt-2" style="display:none;">Nom d'utilisateur ou mot de passe incorrect</p>
+
+      <!-- Boutons sociaux -->
+      <div class="d-flex justify-content-center gap-3 mt-3">
+        <a href="https://www.facebook.com/share/g/1DGXpuFAwq/" class="btn btn-facebook d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/orchestre_de_sousse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-instagram d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+        <a href="https://wa.me/97593287" class="btn btn-whatsapp d-flex align-items-center justify-content-center"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const membres = [
+      {username: "lina", password: "orchestre123"},
+      {username: "chef", password: "opusphere2025"}
+    ];
+
+    const loginForm = document.getElementById("loginForm");
+    const error = document.getElementById("error");
+
+    loginForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const membre = membres.find(m => m.username === username && m.password === password);
+      if(membre){
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "partitions.html";
+      } else {
+        error.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

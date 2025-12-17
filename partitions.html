@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script>
+  if(localStorage.getItem("loggedIn") !== "true"){
+   window.location.replace("login.html");
+  }
+  </script>
+  <title>Partitions - Opusphere</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body class="bg-partition">
+<h1 class="mb-4">Partitions de l’orchestre</h1>
+<!-- Filtres -->
+<div class="filters">
+  <strong>Genre :</strong>
+  <button onclick="setGenre('Classique')" class="btn btn-filter btn-primary">M.Classique</button>
+  <button onclick="setGenre('Film')" class="btn btn-filter btn-primary">M.de Film</button>
+  <button onclick="setGenre('Arabe')" class="btn btn-filter btn-primary">M.Arabe</button>
+  <button onclick="setGenre('Autre')" class="btn btn-filter btn-primary">M.Autres</button>
+  <button onclick="setGenre('All')" class="btn btn-filter btn-secondary">Tout</button>
+</div>
+
+<div class="filters" id="artistButtons">
+  <strong>Artiste :</strong>
+  <!-- Les boutons artistes seront générés automatiquement par JS -->
+</div>
+<div class="filters" id="morceauButtons">
+  <strong>Morceau</strong>
+</div>
+<div class="filters" id="instrumentButtons">
+  <strong>Instrument :</strong>
+  <!-- Boutons instruments générés dynamiquement -->
+</div>
+<!-- Container des cartes -->
+<div class="row row-cols-1 row-cols-md-3 g-4" id="partitionsContainer"></div>
+
+<!-- Déconnexion -->
+<button onclick="logout()" class="btn btn-danger mt-4">Se déconnecter</button>
+
+<script>
+
+  // AJOUTE TES PARTITIONS ICI
+  const partitions = [
+    // Exemple :
+    {genre:"Classique", artiste:"Brahms", titre:"Danse Hangroise n1", instrument:"Conducteur", lien:"https://drive.google.com/file/d/1FgCGDX64KazpUt8z6q-39URldab2vDFa/view?usp=drive_link", img:"orchestre.jpeg"},
+    {genre:"Classique", artiste:"Brahms", titre:"Danse Hangroise n5", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"orchestre.jpeg"},
+    {genre:"Classique", artiste:"Chostakovitch", titre:"Valse n2", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"cha.jpg"},
+    {genre:"Classique", artiste:"Dvorak", titre:"Symphonie n9 Op95", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"dvo.jpg"},
+    {genre:"Classique", artiste:"El Afrit", titre:"Sama3i Zangoulah", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"naceur.png"},
+    {genre:"Classique", artiste:"Grieg", titre:"Peer Gynte Suite 1 Op.46", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"greg.jpg"},
+    {genre:"Classique", artiste:"Khachaturian", titre:"Aram", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"kha.jpg"},
+    {genre:"Classique", artiste:"Khligéne", titre:"Sahra", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Liszt", titre:"Hungarian Rhapsody n2", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"liszt.jpg"},
+    {genre:"Classique", artiste:"Marquez", titre:"Danzon No.2", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Ravel", titre:"Bolero M.81-arr.vents1", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Ravel", titre:"Pavane pour une infante defunte,M.19", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Saint-Saens,Camille", titre:"Danse macabre", instrument:"Violoncelle", lien:"LIEN_DRIVE_3", img:"images/miniature3.jpg"},
+    {genre:"Classique", artiste:"Saint-saens", titre:"Le Carnaval Des Animaux", instrument:"Violon", lien:"LIEN_DRIVE_5", img:"images/miniature5.jpg"},
+    {genre:"Classique", artiste:"Sarasate", titre:"Zigeunerweisen", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Strauss(Richard)", titre:"Ainsi Parlait Zarathoustra", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Classique", artiste:"Tchaikovsky,Pyotr", titre:"Lac des Cygnes Op.20a", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Film", titre:"Conquest of paradice", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Film", titre:"Hanging Tree,Hunger Game", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Film", titre:"Harry Potter", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Film", titre:"Isabella's Lullaby(The promised Neverland)", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Film", titre:"Old Boy Three waltzes", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Arabe", titre:"Cocktail jouini", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Arabe", titre:"Halimièt", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Arabe", titre:"ye msafir wahdak", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Arabe", titre:"Zahrat Al Mada2en", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Autre", titre:"Auld Lang Syne", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Autre", titre:"Cohen Hallelujah", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Autre", titre:"Hymnes Nationaux", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+    {genre:"Autre", titre:"La Vie en Rose", instrument:"Alto", lien:"LIEN_DRIVE_2", img:"images/miniature2.jpg"},
+
+    // ajoute toutes tes partitions ici
+  ];
+
+  let selectedGenre = null;
+  let selectedArtist = null;
+  let selectedMorceau = null;
+  let selectedInstrument = null;
+
+  const artistButtonsDiv = document.getElementById("artistButtons");
+  const morceauButtonsDiv = document.getElementById("morceauButtons");
+  const instrumentButtonsDiv = document.getElementById("instrumentButtons");
+  const partitionsContainer = document.getElementById("partitionsContainer");
+
+  function setGenre(genre){
+    selectedGenre = genre;
+    selectedArtist = null;
+    selectedMorceau = null;
+    selectedInstrument = null;
+    generateArtistButtons();
+    generateMorceauButtons();
+    generateInstrumentButtons();
+    showPartitions();
+  }
+
+  function setArtist(artiste){
+    selectedArtist = artiste;
+    selectedMorceau = null;
+    selectedInstrument = null;
+    generateMorceauButtons();
+    generateInstrumentButtons();
+    showPartitions();
+  }
+
+  function setMorceau(morceau){
+    selectedMorceau = morceau;
+    selectedInstrument = null;
+    generateInstrumentButtons();
+    showPartitions();
+  }
+
+  function setInstrument(instr){
+    selectedInstrument = instr;
+    showPartitions();
+    // Ouvre la partition
+    const p = partitions.find(p => 
+      p.genre===selectedGenre &&
+      p.artiste===selectedArtist &&
+      p.titre===selectedMorceau &&
+      p.instrument===selectedInstrument
+    );
+    if(p) window.open(p.lien,"_blank");
+  }
+
+  function generateArtistButtons(){
+    artistButtonsDiv.innerHTML = "<strong>Artiste :</strong> ";
+    if(!selectedGenre) return;
+    const artistes = [...new Set(partitions.filter(p=>p.genre===selectedGenre).map(p=>p.artiste))];
+    artistes.forEach(a=>{
+      artistButtonsDiv.innerHTML += `<button class="btn btn-primary btn-filter" onclick="setArtist('${a}')">${a}</button> `;
+    });
+    artistButtonsDiv.innerHTML += `<button class="btn btn-secondary btn-filter" onclick="setArtist(null)">Tous</button>`;
+  }
+
+  function generateMorceauButtons(){
+    morceauButtonsDiv.innerHTML = "<strong>Morceau :</strong> ";
+    if(!selectedGenre || !selectedArtist) return;
+    const morceaux = [...new Set(partitions
+      .filter(p=>p.genre===selectedGenre && p.artiste===selectedArtist)
+      .map(p=>p.titre))];
+    morceaux.forEach(m=>{
+      morceauButtonsDiv.innerHTML += `<button class="btn btn-primary btn-filter" onclick="setMorceau('${m}')">${m}</button> `;
+    });
+    morceauButtonsDiv.innerHTML += `<button class="btn btn-secondary btn-filter" onclick="setMorceau(null)">Tous</button>`;
+  }
+
+  function generateInstrumentButtons(){
+    instrumentButtonsDiv.innerHTML = "<strong>Instrument :</strong> ";
+    if(!selectedGenre || !selectedArtist || !selectedMorceau) return;
+    const instruments = partitions
+      .filter(p=>p.genre===selectedGenre && p.artiste===selectedArtist && p.titre===selectedMorceau)
+      .map(p=>p.instrument);
+    instruments.forEach(i=>{
+      instrumentButtonsDiv.innerHTML += `<button class="btn btn-primary btn-filter" onclick="setInstrument('${i}')">${i}</button> `;
+    });
+    instrumentButtonsDiv.innerHTML += `<button class="btn btn-secondary btn-filter" onclick="setInstrument(null)">Tous</button>`;
+  }
+
+  function showPartitions(){
+    let filtered = partitions;
+    if(selectedGenre) filtered = filtered.filter(p=>p.genre===selectedGenre);
+    if(selectedArtist) filtered = filtered.filter(p=>p.artiste===selectedArtist);
+    if(selectedMorceau) filtered = filtered.filter(p=>p.titre===selectedMorceau);
+    if(selectedInstrument) filtered = filtered.filter(p=>p.instrument===selectedInstrument);
+
+    partitionsContainer.innerHTML = "";
+    filtered.forEach(p=>{
+    partitionsContainer.innerHTML += `
+  <div class="col-md-4">
+    <div class="card p-3 mb-3">
+      <img src="${p.img}" class="card-img-top mb-2" alt="Miniature">
+      <h5 class="card-title">${p.titre}</h5>
+      <p>Genre: ${p.genre} <br> Artiste: ${p.artiste} <br> Instrument: ${p.instrument}</p>
+      <a href="${p.lien}" target="_blank" class="btn btn-download">Voir / Télécharger</a>
+    </div>
+  </div>
+`;
+
+    });
+  }
+
+
+  function logout(){
+    localStorage.removeItem("loggedIn");
+    window.location.href="login.html";
+  }
+
+  // Initialisation
+  showPartitions();
+  
+
+</script>
+</body>
+</html>

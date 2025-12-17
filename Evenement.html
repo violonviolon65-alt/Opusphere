@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendrier | Orchestre Symphonique</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="events-page page-orchestre">
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand text-gold" href="orchestre.html"> Orchestre</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+      <li class="nav-item"><a class="nav-link active" href="#">Calendrier</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- CALENDRIER -->
+<div class="container my-5">
+  <h1 class="text-center page-title mb-4">📅 Calendrier de l’Orchestre</h1>
+  <div class="text-center mb-3">
+    <button class="btn btn-outline-gold mx-1" onclick="filterEvents('all')">Tous</button>
+    <button class="btn btn-outline-gold mx-1" onclick="filterEvents('concert')">Concerts</button>
+    <button class="btn btn-outline-gold mx-1" onclick="filterEvents('repetition')">Répétitions</button>
+  </div>
+  <div class="calendar-box">
+    <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- SECTION ORCHESTRE -->
+<section class="orchestre-section my-5">
+  <div class="container">
+    <h2 class="text-center page-title mb-4">L’Orchestre Symphonique</h2>
+    <div class="orchestre-box mb-5">
+      <p class="text-center">
+        Un orchestre symphonique est un ensemble musical composé de plusieurs familles d’instruments. Il interprète des œuvres classiques, modernes et contemporaines sous la direction d’un chef d’orchestre.
+      </p>
+    </div>
+
+    <!-- Instruments -->
+    <div class="row g-4">
+      <!-- Cordes -->
+      <div class="col-md-6 col-lg-3">
+        <div class="instrument-card"
+             data-bs-toggle="modal" data-bs-target="#instrumentModal"
+             data-title=" Cordes"
+             data-img="corde.jpg"
+             data-desc="Violons, altos, violoncelles et contrebasses. Elles constituent le cœur de l’orchestre. Rôle principal dans la mélodie et l’harmonie."
+             data-examples="Exemple: Violon solo, Violoncelle solo">
+          <h4> Cordes</h4>
+          <p>Violon, alto, violoncelle et contrebasse.</p>
+        </div>
+      </div>
+      <!-- Bois -->
+      <div class="col-md-6 col-lg-3">
+        <div class="instrument-card"
+             data-bs-toggle="modal" data-bs-target="#instrumentModal"
+             data-title=" Bois"
+             data-img="bois.jpg"
+             data-desc="Flûte, hautbois, clarinette, basson. Sonorités douces et expressives. Souvent utilisé pour les mélodies et les contrechants."
+             data-examples="Exemple: Flûte solo, Clarinette solo">
+          <h4> Bois</h4>
+          <p>Flûte, hautbois, clarinette, basson.</p>
+        </div>
+      </div>
+      <!-- Cuivres -->
+      <div class="col-md-6 col-lg-3">
+        <div class="instrument-card"
+             data-bs-toggle="modal" data-bs-target="#instrumentModal"
+             data-title=" Cuivres"
+             data-img="cuivre.jpg"
+             data-desc="Trompette, cor, trombone, tuba. Puissance et éclat sonore, souvent utilisés pour les fanfares et les effets dramatiques."
+             data-examples="Exemple: Trompette solo">
+          <h4> Cuivres</h4>
+          <p>Trompette, cor, trombone, tuba.</p>
+        </div>
+      </div>
+      <!-- Percussions -->
+      <div class="col-md-6 col-lg-3">
+        <div class="instrument-card"
+             data-bs-toggle="modal" data-bs-target="#instrumentModal"
+             data-title=" Percussions"
+             data-img="perc.jpg"
+             data-desc="Timbales, caisse claire, cymbales. Rythme et intensité. Maintiennent le tempo et ajoutent de la couleur sonore."
+             data-examples="Exemple: Timbales solo">
+          <h4> Percussions</h4>
+          <p>Timbales, caisse claire, cymbales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="gold-separator">
+</section>
+
+<!-- MODAL INSTRUMENT -->
+<div class="modal fade" id="instrumentModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-dark">
+      <div class="modal-header">
+        <h5 class="modal-title text-gold" id="instrumentTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img id="instrumentImg" src="" alt="Instrument">
+        <p id="instrumentDesc"></p>
+        <p id="instrumentExamples" class="fst-italic"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-gold" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ÉVÉNEMENT -->
+<div class="modal fade" id="eventModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-dark">
+      <div class="modal-header">
+        <h5 class="modal-title text-gold" id="eventTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Date :</strong> <span id="eventDate"></span></p>
+        <p><strong>Lieu :</strong> <span id="eventPlace"></span></p>
+        <p id="eventDesc" class="fst-italic"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-gold">🎟 Réserver</a>
+        <button class="btn btn-outline-gold" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center footer">© Orchestre Symphonique</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script>
+  // CALENDRIER
+  let calendar;
+  document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+
+    calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'fr',
+      themeSystem: 'bootstrap5',
+      events: [
+        { title: ' Répétition générale', start: '2025-12-20', classNames: ['event-repetition'], extendedProps: { type: 'repetition', place: 'conservatoire', description: 'repetition general' }},
+        { title: ' Répétition générale', start: '2025-12-27', classNames: ['event-repetition'], extendedProps: { type: 'repetition', place: 'conservatoire', description: 'repetition general' }},
+        { title: 'Concert symphonique', start: '2026-01-16', classNames: ['event-concert'], extendedProps: { type: 'concert', place: 'Salle de musique', description: 'noiel.' }},
+        { title: 'Concert symphonique', start: '2026-01-21', classNames: ['event-concert'], extendedProps: { type: 'concert', place: 'Salle de musique', description: 'noiel.' }},
+      ],
+      eventClick: function(info) {
+        document.getElementById('eventTitle').innerText = info.event.title;
+        document.getElementById('eventDate').innerText = info.event.start.toLocaleDateString('fr-FR');
+        document.getElementById('eventPlace').innerText = info.event.extendedProps.place;
+        document.getElementById('eventDesc').innerText = info.event.extendedProps.description;
+        modal.show();
+      }
+    });
+
+    calendar.render();
+  });
+
+  function filterEvents(type) {
+    calendar.getEvents().forEach(event => {
+      event.setProp('display', (type === 'all' || event.extendedProps.type === type) ? 'auto' : 'none');
+    });
+  }
+
+  // MODAL INSTRUMENT
+  const instrumentModalEl = document.getElementById('instrumentModal');
+  instrumentModalEl.addEventListener('show.bs.modal', function(event) {
+    const card = event.relatedTarget;
+    document.getElementById('instrumentTitle').innerText = card.getAttribute('data-title');
+    document.getElementById('instrumentDesc').innerText = card.getAttribute('data-desc');
+    document.getElementById('instrumentExamples').innerText = card.getAttribute('data-examples');
+    document.getElementById('instrumentImg').src = card.getAttribute('data-img');
+  });
+</script>
+
+</body>
+</html>

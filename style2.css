@@ -1,0 +1,406 @@
+/* ==============================
+   GLOBAL
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cinzel', 'Playfair Display', serif; /* élégant et classique */
+  color: #f5e5b8; /* doré doux, visible mais subtil */
+  background-color: #0f0f0f; /* fond très sombre */
+  line-height: 1.7;
+  background: radial-gradient(circle at top, #0f0f0f, #111);
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px;
+  background: #111; /* sobre, élégant */
+  border-bottom: 2px solid #d4af37; /* doré subtil */
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  color: #d4af37; /* doré doux */
+  letter-spacing: 2px;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #f5e5b8;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-left: 30px;
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: #d4af37;
+}
+
+/* ==============================
+   HERO
+============================== */
+.hero {
+  height: 100vh;
+  width: 100%;
+  background: url('acc.jpg') no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6); /* voile sombre pour lisibilité */
+  z-index: 1;
+}
+
+.hero .content {
+  position: relative;
+  z-index: 2;
+  color: #d4af37;
+  max-width: 800px;
+}
+
+.hero h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.hero button {
+  padding: 12px 35px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #0f0f0f;
+  background: #d4af37;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hero button:hover {
+  background: #c9a932;
+}
+
+/* ==============================
+   DEFINITION SECTION
+============================== */
+.definition-box {
+  background: radial-gradient(circle at top center, #1a1a1a, #000); /* noir profond avec un léger dégradé */
+  border-radius: 25px;
+  padding: 50px 35px;
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); /* halo doré plus visible */
+  border: 2px solid rgba(212, 175, 55, 0.4); /* bordure dorée subtile */
+}
+
+.definition-box::before {
+  content: "";
+  position: absolute;
+  top: -15px; left: -15px; right: -15px; bottom: -15px;
+  border-radius: 30px;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.25), transparent);
+  z-index: 0;
+}
+
+.definition-box p, .definition-box h3 {
+  position: relative;
+  z-index: 1;
+}
+
+.definition-box h3 {
+  color: #ffd700; /* doré éclatant */
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(212,175,55,0.7); /* effet lumière royale */
+}
+
+.definition-box p {
+  color: #f5e5b8;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px rgba(212,175,55,0.3);
+}
+
+.definition-box p strong {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+
+
+/* ==============================
+   SOCIAL BUTTONS
+============================== */
+.social-buttons a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #222;
+  color: #d4af37;
+  font-size: 1.5rem;
+  margin: 0 8px;
+  transition: all 0.3s;
+}
+
+.social-buttons a:hover {
+  background: #333;
+  color: #d4af37;
+  transform: scale(1.1);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #111;
+  color: #f5e5b8;
+  border-top: 2px solid #d4af37;
+  font-size: 1rem;
+}
+/*loginnnn*/
+/* Fond plein écran */
+.login-hero {
+  height: 100vh;
+  background: url('acc3.jpg') no-repeat center center/cover;
+  position: relative;
+}
+
+.login-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7); /* overlay sombre */
+  backdrop-filter: blur(5px); /* effet verre dépoli */
+  z-index: 1;
+}
+
+/* Carte de login */
+.login-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(26,26,26,0.85);
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(212,175,55,0.5); /* lueur dorée */
+  width: 350px;
+  color: #fff;
+}
+
+/* Inputs */
+.login-card .form-control {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  color: #fff;
+}
+
+.login-card .form-control::placeholder {
+  color: #ccc;
+}
+
+/* Bouton doré */
+.btn-login {
+  background: linear-gradient(90deg, #d4af37, #f5d76e);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 0;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(212,175,55,0.8);
+}
+
+/* Boutons sociaux ronds */
+.btn-facebook, .btn-instagram, .btn-whatsapp {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-facebook { background-color: #1877f2; }
+.btn-facebook:hover {
+  background: linear-gradient(135deg, #1877f2, #4a8ef5);
+  transform: scale(1.3) rotate(10deg);
+  box-shadow: 0 0 20px #1877f2;
+}
+
+.btn-instagram { background: linear-gradient(45deg, #feda75, #d62976, #8134af, #515bd4); }
+.btn-instagram:hover {
+  transform: scale(1.3) rotate(10deg);
+  box-shadow: 0 0 20px #feda75;
+}
+
+.btn-whatsapp { background-color: #25d366; }
+.btn-whatsapp:hover {
+  transform: scale(1.3) rotate(10deg);
+  box-shadow: 0 0 20px #25d366;
+}
+/*partition*/
+/* ======= Page Partitions ======= */
+body.partitions-page {
+  background: #0a0a0a url('concert.png') no-repeat center/cover;
+  background-size: cover;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Titre de la page */
+h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #ffd700;
+  text-shadow: 0 0 15px rgba(255,215,0,0.6);
+  margin: 40px 0;
+}
+
+/* Filtres */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filters strong {
+  color: #ffd700;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+/* Boutons filtres */
+.btn-filter {
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary.btn-filter {
+  background: linear-gradient(90deg, #d4af37, #f5d76e);
+  border: none;
+  color: #000;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+}
+
+.btn-primary.btn-filter:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,215,0,0.8);
+}
+
+.btn-secondary.btn-filter {
+  background: #444;
+  color: #fff;
+}
+
+.btn-secondary.btn-filter:hover {
+  background: #555;
+}
+
+/* Cartes partitions */
+#partitionsContainer .card {
+  background: rgba(26,26,26,0.95);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(212,175,55,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#partitionsContainer .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255,215,0,0.8);
+}
+
+/* Image de la carte */
+.card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #000;
+}
+
+/* Titres et textes */
+.card-title {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card-text {
+  color: #ddd;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Bouton télécharger */
+.btn-download {
+  width: 100%;
+  background: linear-gradient(90deg, #d4af37, #f5d76e);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 0;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.btn-download:hover {
+  background: linear-gradient(90deg, #ffd700, #f5d76e);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  transform: scale(1.05);
+}
+
+/* Déconnexion */
+.btn-danger {
+  display: block;
+  margin: 30px auto 60px auto;
+  width: 200px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255,0,0,0.5);
+}
+
+.btn-danger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255,0,0,0.8);
+}
+
+

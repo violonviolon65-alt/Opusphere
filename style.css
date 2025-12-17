@@ -1,0 +1,135 @@
+/* ======= PAGE ÉVÉNEMENTS & ORCHESTRE ======= */
+body.events-page {
+  font-family: 'Playfair Display', serif;
+  background: #0b0b0b url('chef.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6d8a8;
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: #1e1e1e;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+}
+.nav-link.active {
+  font-weight: bold;
+  color: #d4af37 !important;
+}
+
+/* TITRES */
+.page-title, .text-gold {
+  color: #d4af37;
+}
+
+/* CALENDRIER */
+.calendar-box {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(212,175,55,0.4);
+  box-shadow: 0 0 30px rgba(212,175,55,0.2);
+}
+
+/* FullCalendar boutons */
+.fc-toolbar-title { color: #d4af37; }
+.fc-button {
+  background: transparent !important;
+  border: 1px solid #d4af37 !important;
+  color: #d4af37 !important;
+}
+.fc-button:hover, .fc-button-active {
+  background: #d4af37 !important;
+  color: #000 !important;
+}
+
+/* TYPES D’ÉVÉNEMENTS */
+.event-concert {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  color: #000;
+}
+.event-repetition {
+  background: linear-gradient(135deg, #0d6efd, #4a6cf7);
+  color: #fff;
+}
+
+/* MODAL DARK */
+.modal-dark {
+  background-color: #1e1e1e;
+  color: #e6d8a8;
+}
+.modal-title.text-gold { color: #d4af37; }
+.modal-body img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 15px; /* image en dessous du texte */
+}
+
+/* BOUTONS MODAL */
+.btn-gold {
+  background-color: #d4af37;
+  color: #000;
+}
+.btn-outline-gold {
+  border: 1px solid #d4af37;
+  color: #d4af37;
+}
+.btn-outline-gold:hover {
+  background-color: #d4af37;
+  color: #000;
+}
+
+/* SECTION ORCHESTRE */
+.orchestre-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.orchestre-box {
+  background: rgba(0,0,0,0.6);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(212,175,55,0.4);
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  font-size: 1.1rem;
+}
+
+/* CARTES INSTRUMENTS */
+.instrument-card {
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.instrument-card h4 { color: #d4af37; margin-bottom: 10px; }
+.instrument-card p { color: #e6d8a8; font-size: 0.95rem; }
+.instrument-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+}
+
+/* SEPARATEUR DORÉ */
+.gold-separator {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  margin: 60px 0;
+}
+
+/* FOOTER */
+.footer {
+  padding: 20px;
+  background-color: #1a1a1a;
+  color: #e6d8a8;
+  text-align: center;
+}
